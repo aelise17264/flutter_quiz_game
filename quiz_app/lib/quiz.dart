@@ -18,7 +18,7 @@ class _QuizState extends State<Quiz> {
     super.initState();
   }
 
-  void switchScreen(){
+  void switchScreen() {
     setState(() {
       displayScreen = QuestionsScreen();
     });
@@ -40,6 +40,7 @@ class _QuizState extends State<Quiz> {
             fontSize: 18.0,
             color: Colors.deepPurpleAccent,
           ),
+          bodyMedium: TextStyle(fontSize: 36.0, color: Colors.white),
         ),
       ),
       home: Scaffold(
