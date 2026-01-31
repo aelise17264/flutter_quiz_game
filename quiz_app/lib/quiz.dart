@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/landing_screen.dart';
 import 'package:quiz_app/questions_screen.dart';
 
@@ -10,6 +12,7 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
+  List<String> selectedAnswers = [];
   Widget? displayScreen;
 
   @override
@@ -20,8 +23,20 @@ class _QuizState extends State<Quiz> {
 
   void switchScreen() {
     setState(() {
-      displayScreen = QuestionsScreen();
+      displayScreen = QuestionsScreen(onSelectAnswer: chooseAnswer,);
     });
+  }
+
+  void chooseAnswer(String answer){
+    selectedAnswers.add(answer);
+    print(selectedAnswers.length);
+    if(selectedAnswers.length == qQuestions.length){
+      setState(() {
+      displayScreen = LandingScreen(switchScreen);
+        
+      });
+      // selectedAnswers = [];
+    }
   }
 
   @override
@@ -30,7 +45,7 @@ class _QuizState extends State<Quiz> {
       title: 'Quiz App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        textTheme: const TextTheme(
+        textTheme: TextTheme(
           displayMedium: TextStyle(
             fontSize: 36.0,
             fontWeight: FontWeight.bold,
@@ -40,7 +55,7 @@ class _QuizState extends State<Quiz> {
             fontSize: 18.0,
             color: Colors.deepPurpleAccent,
           ),
-          bodyMedium: TextStyle(fontSize: 36.0, color: Colors.white),
+          bodyMedium: TextStyle(fontSize: 36.0, color: Colors.white, fontFamily: GoogleFonts.mavenPro().fontFamily),
         ),
       ),
       home: Scaffold(
