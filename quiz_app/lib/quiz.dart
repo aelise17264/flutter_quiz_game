@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_app/data/questions.dart';
-import 'package:quiz_app/landing_screen.dart';
-import 'package:quiz_app/questions_screen.dart';
+import 'package:quiz_app/screens/landing_screen.dart';
+import 'package:quiz_app/screens/questions_screen.dart';
+import 'package:quiz_app/screens/results_screen.dart';
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
@@ -23,17 +24,26 @@ class _QuizState extends State<Quiz> {
 
   void switchScreen() {
     setState(() {
-      displayScreen = QuestionsScreen(onSelectAnswer: chooseAnswer,);
+      displayScreen = QuestionsScreen(onSelectAnswer: chooseAnswer);
     });
   }
 
-  void chooseAnswer(String answer){
-    selectedAnswers.add(answer);
-    print(selectedAnswers.length);
-    if(selectedAnswers.length == qQuestions.length){
-      setState(() {
+  void restartQuiz() {
+    setState(() {
+      selectedAnswers = [];
       displayScreen = LandingScreen(switchScreen);
-        
+    });
+  }
+
+  void chooseAnswer(String answer) {
+    selectedAnswers.add(answer);
+
+    if (selectedAnswers.length == qQuestions.length) {
+      setState(() {
+        displayScreen = ResultsScreen(
+          userAnswers: selectedAnswers,
+          onRestart: restartQuiz,
+        );
       });
       // selectedAnswers = [];
     }
@@ -55,7 +65,17 @@ class _QuizState extends State<Quiz> {
             fontSize: 18.0,
             color: Colors.deepPurpleAccent,
           ),
-          bodyMedium: TextStyle(fontSize: 36.0, color: Colors.white, fontFamily: GoogleFonts.mavenPro().fontFamily),
+          bodyMedium: TextStyle(
+            fontSize: 36.0,
+            color: Colors.white,
+            fontFamily: GoogleFonts.mavenPro().fontFamily,
+          ),
+          bodySmall: TextStyle(
+            fontSize: 24.0,
+            color: Colors.white,
+            fontFamily: GoogleFonts.mavenPro().fontFamily,
+          ),
+          labelSmall: TextStyle(color: Colors.white),
         ),
       ),
       home: Scaffold(

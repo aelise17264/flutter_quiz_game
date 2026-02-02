@@ -40,9 +40,9 @@ class _QuestionsState extends State<QuestionsScreen> {
             ...currentQuestion.getShuffelledAnswers().map((answer) {
               return AnswerButton(
                 answerText: answer,
-                finalAnswer: (){
+                finalAnswer: () {
                   answerQuestion(answer);
-                }
+                },
               );
             }),
           ],
