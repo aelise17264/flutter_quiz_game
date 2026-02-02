@@ -51,19 +51,25 @@ class ResultsScreen extends StatelessWidget {
             SizedBox(height: 30),
             QuestionsSummary(answerData: getAnswersSummary()),
             SizedBox(height: 30),
-            ElevatedButton(
+            ElevatedButton.icon(
               onPressed: onRestart,
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 40,
-                ),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                // padding: const EdgeInsets.symmetric(
+                //   vertical: 10,
+                //   horizontal: 40,
+                // ),
                 backgroundColor: Theme.of(context).colorScheme.inversePrimary,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
               ),
-              child: Text('Restart Quiz'),
+              icon: const Icon(
+                Icons.restart_alt_sharp,
+                color: Colors.white,
+                size: 20.0
+              ),
+              label: Text('Restart Quiz'),
             ),
           ],
         ),
